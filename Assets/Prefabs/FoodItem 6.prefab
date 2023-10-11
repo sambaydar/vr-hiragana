@@ -198,6 +198,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6602789337480932564}
     m_Modifications:
+    - target: {fileID: 3986043593034946069, guid: d52c2a04d97d0874ca6350dd8ab739f7, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8196281394730729872, guid: d52c2a04d97d0874ca6350dd8ab739f7, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -308,6 +312,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plate2
       objectReference: {fileID: 0}
+    - target: {fileID: 7627753000917484995, guid: 36f1a0296778fed44aae14893f51eada, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36f1a0296778fed44aae14893f51eada, type: 3}
 --- !u!4 &2508384605815785143 stripped
@@ -381,6 +389,10 @@ PrefabInstance:
     - target: {fileID: 2130398903583827992, guid: 3f167d12854f242cc9af518cdaae4754, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130398903583827993, guid: 3f167d12854f242cc9af518cdaae4754, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2130398903583827995, guid: 3f167d12854f242cc9af518cdaae4754, type: 3}
       propertyPath: m_Name

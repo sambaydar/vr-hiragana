@@ -198,6 +198,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6602789337480932564}
     m_Modifications:
+    - target: {fileID: 862841056026670945, guid: a9e202b40ff7d6d49ae919306ab69bbd, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5024780585337166585, guid: a9e202b40ff7d6d49ae919306ab69bbd, type: 3}
       propertyPath: m_Name
       value: Nigiri_Salmon
@@ -320,6 +324,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2130398903583827993, guid: 3f167d12854f242cc9af518cdaae4754, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2130398903583827995, guid: 3f167d12854f242cc9af518cdaae4754, type: 3}
       propertyPath: m_Name
       value: Kana_A
@@ -338,6 +346,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6602789337480932564}
     m_Modifications:
+    - target: {fileID: 205394212076459974, guid: 7826125f0b3bcb24a8dc94e6f318ffbb, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1354460402370637737, guid: 7826125f0b3bcb24a8dc94e6f318ffbb, type: 3}
       propertyPath: m_Name
       value: Plate3

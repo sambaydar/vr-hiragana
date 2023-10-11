@@ -246,6 +246,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2124050431485939211, guid: 6166899ba27729e48a95f8cba47d1e23, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6166899ba27729e48a95f8cba47d1e23, type: 3}
 --- !u!4 &6422795590126055819 stripped
@@ -320,6 +324,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2130398903583827993, guid: 3f167d12854f242cc9af518cdaae4754, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2130398903583827995, guid: 3f167d12854f242cc9af518cdaae4754, type: 3}
       propertyPath: m_Name
       value: Kana_A
@@ -338,6 +346,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6602789337480932564}
     m_Modifications:
+    - target: {fileID: 2171383761325930564, guid: 7c1b7adf4ba9be947a8f95c156938d5c, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7093265318352171357, guid: 7c1b7adf4ba9be947a8f95c156938d5c, type: 3}
       propertyPath: m_Name
       value: Tamago

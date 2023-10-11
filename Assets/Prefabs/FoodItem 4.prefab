@@ -202,6 +202,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nigiri_Maguro
       objectReference: {fileID: 0}
+    - target: {fileID: 5680909805004762661, guid: fddcf2a76b8f7c4409247300a82a7448, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5745961658920163207, guid: fddcf2a76b8f7c4409247300a82a7448, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -308,6 +312,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6036731799445914670, guid: 77b25967fd3129d48969237ff4b940ef, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77b25967fd3129d48969237ff4b940ef, type: 3}
 --- !u!4 &9068070977031266343 stripped
@@ -381,6 +389,10 @@ PrefabInstance:
     - target: {fileID: 2130398903583827992, guid: 3f167d12854f242cc9af518cdaae4754, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130398903583827993, guid: 3f167d12854f242cc9af518cdaae4754, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2130398903583827995, guid: 3f167d12854f242cc9af518cdaae4754, type: 3}
       propertyPath: m_Name

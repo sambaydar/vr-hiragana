@@ -198,6 +198,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6602789337480932564}
     m_Modifications:
+    - target: {fileID: 42076672626296881, guid: 1d356befba489b04589a10cb6021bcaa, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5037949313241181621, guid: 1d356befba489b04589a10cb6021bcaa, type: 3}
       propertyPath: m_Name
       value: Plate1
@@ -324,6 +328,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2130398903583827993, guid: 3f167d12854f242cc9af518cdaae4754, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2130398903583827995, guid: 3f167d12854f242cc9af518cdaae4754, type: 3}
       propertyPath: m_Name
       value: Kana_A
@@ -400,6 +408,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4098107520147890757, guid: 2bd9013cc1de1004abf1251cbf3c7412, type: 3}
       propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713396166842336061, guid: 2bd9013cc1de1004abf1251cbf3c7412, type: 3}
+      propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
