@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Restaurant.unity
+    path: Assets/Scenes/Angela.unity
     guid: 7d71fabd756450e4d9c8c588c0c4a596
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 0102db18eb48bfa44b8822795a620ca4, type: 2}
