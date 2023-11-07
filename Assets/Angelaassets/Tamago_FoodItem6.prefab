@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8365822679647027221}
   m_Layer: 0
   m_Name: Tamago_FoodItem6
-  m_TagString: Untagged
+  m_TagString: food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,8 +189,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.054220602, z: 0.2}
-  m_Center: {x: 0, y: 0.022889696, z: 0}
+  m_Size: {x: 0.16471021, y: 0.0542206, z: 0.1578988}
+  m_Center: {x: 0.0001684357, y: 0.022889694, z: -0.0024870387}
 --- !u!114 &8365822679647027221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FoodId: 5
+  initialTransform: {fileID: 0}
 --- !u!1001 &906664531226452327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -214,6 +215,10 @@ PrefabInstance:
     - target: {fileID: 3986043593034946069, guid: d52c2a04d97d0874ca6350dd8ab739f7, type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986043593034946069, guid: d52c2a04d97d0874ca6350dd8ab739f7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8196281394730729872, guid: d52c2a04d97d0874ca6350dd8ab739f7, type: 3}
       propertyPath: m_RootOrder
@@ -328,6 +333,10 @@ PrefabInstance:
     - target: {fileID: 7627753000917484995, guid: 36f1a0296778fed44aae14893f51eada, type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627753000917484995, guid: 36f1a0296778fed44aae14893f51eada, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36f1a0296778fed44aae14893f51eada, type: 3}

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5780065888218400407}
   m_Layer: 0
   m_Name: Ikura_FoodItem3
-  m_TagString: Untagged
+  m_TagString: food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,8 +189,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.054220602, z: 0.2}
-  m_Center: {x: 0, y: 0.022889696, z: 0}
+  m_Size: {x: 0.15379354, y: 0.0542206, z: 0.14661077}
+  m_Center: {x: 0.0052507655, y: 0.022889694, z: -0.0011069984}
 --- !u!114 &5780065888218400407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FoodId: 2
+  initialTransform: {fileID: 0}
 --- !u!1001 &6915969454754765910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -263,6 +264,10 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4269445748134791314, guid: 4c5d3a72ad3f9754ea73cc5056d59723, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c5d3a72ad3f9754ea73cc5056d59723, type: 3}
 --- !u!4 &8687404508889050706 stripped
@@ -280,6 +285,10 @@ PrefabInstance:
     - target: {fileID: 205394212076459974, guid: 7826125f0b3bcb24a8dc94e6f318ffbb, type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 205394212076459974, guid: 7826125f0b3bcb24a8dc94e6f318ffbb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1354460402370637737, guid: 7826125f0b3bcb24a8dc94e6f318ffbb, type: 3}
       propertyPath: m_Name

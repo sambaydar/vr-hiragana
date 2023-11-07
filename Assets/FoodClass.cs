@@ -5,16 +5,17 @@ using UnityEngine;
 public class FoodClass : MonoBehaviour
 {
     public int FoodId;
-    public Transform initialTransform;
+    public Vector3 initialPos;
+    public Quaternion intialRot;
     // Start is called before the first frame update
     void Start()
     {
-        initialTransform=gameObject.transform;
+        initialPos = gameObject.transform.position;
+        intialRot= gameObject.transform.rotation;
     }
-
-    // Update is called once per frame
-    void Update()
+    public void resetTransform()
     {
-        
+        gameObject.transform.position= initialPos;
+        gameObject.transform.rotation = intialRot;
     }
 }

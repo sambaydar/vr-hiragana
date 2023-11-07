@@ -45,6 +45,7 @@ TagManager:
   - kana_ri
   - kana_re
   - kana_ro
+  - food
   layers:
   - Default
   - TransparentFX

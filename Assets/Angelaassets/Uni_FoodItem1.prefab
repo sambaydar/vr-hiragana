@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -4644735732363940325}
   m_Layer: 0
   m_Name: Uni_FoodItem1
-  m_TagString: Untagged
+  m_TagString: food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,8 +189,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.054220602, z: 0.2}
-  m_Center: {x: 0, y: 0.022889696, z: 0}
+  m_Size: {x: 0.15467766, y: 0.0542206, z: 0.15378717}
+  m_Center: {x: 0.0023712348, y: 0.022889694, z: -0.0005133012}
 --- !u!114 &-4644735732363940325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b3b178fb00df44fbdb31f7a27e80e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FoodId: 0
+  initialTransform: {fileID: 0}
 --- !u!1001 &6602789336237978495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213,6 +215,10 @@ PrefabInstance:
     - target: {fileID: 42076672626296881, guid: 1d356befba489b04589a10cb6021bcaa, type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 42076672626296881, guid: 1d356befba489b04589a10cb6021bcaa, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5037949313241181621, guid: 1d356befba489b04589a10cb6021bcaa, type: 3}
       propertyPath: m_Name
@@ -343,6 +349,10 @@ PrefabInstance:
     - target: {fileID: 4713396166842336061, guid: 2bd9013cc1de1004abf1251cbf3c7412, type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713396166842336061, guid: 2bd9013cc1de1004abf1251cbf3c7412, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bd9013cc1de1004abf1251cbf3c7412, type: 3}
