@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class GameControllerAng : MonoBehaviour
@@ -62,10 +63,11 @@ public class GameControllerAng : MonoBehaviour
         repeat= true;
 
 
-        if (currentRound<repeatTimes)
+        if (currentRound < repeatTimes)
         {
             presureplate.SetCorrectId(randomFoodsList[currentRound]);
-            CurrSound.clip = requestAudios[currentRound];
+            CurrSound.clip = requestAudios[randomFoodsList[currentRound]];
+            UnityEngine.Debug.Log(randomFoodsList[currentRound]);
             CurrSound.Play();
         }
         else

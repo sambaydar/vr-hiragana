@@ -12,8 +12,9 @@ public class PressurePlateAngela : MonoBehaviour
     public AnimationStateController asc;
     private int correctFoodId=-1;
     private AudioSource CurrSound;
-
+    private bool roundStarted = true;
     public GameControllerAng gameController;
+    private bool repeat = false;
 
     void OnTriggerEnter(Collider other) {
         //UnityEngine.Debug.Log(other.gameObject.name);
@@ -21,18 +22,38 @@ public class PressurePlateAngela : MonoBehaviour
         { 
             if (other.gameObject.tag == "food") {
                 FoodClass script= other.gameObject.GetComponent<FoodClass>();
-                if (script.FoodId== correctFoodId)
+                if (script.FoodId== correctFoodId && !repeat)
                 {
                     CurrSound.clip = CorrectSound;
                     CurrSound.Play();
                     asc.ApprovalAnimation();
                     gameController.isCorrect();
+                    roundStarted = false;
+                    repeat = true;
                 }
-                else {
-                    CurrSound.clip = IncorrectSound;
-                    CurrSound.Play();
-                    asc.RejectionAnimation();
-                    gameController.isIncorrect();
+                else if(!(script.FoodId == correctFoodId))
+                {
+                    if (!repeat)
+                    {
+                    
+                        CurrSound.clip = IncorrectSound;
+                        CurrSound.Play();
+                        asc.RejectionAnimation();
+                        gameController.isIncorrect();
+                        repeat = true;
+                    }
+                    else
+                    {
+                        if(roundStarted)
+                        {
+                            roundStarted = false;
+                            CurrSound.clip = IncorrectSound;
+                            CurrSound.Play();
+                            asc.RejectionAnimation();
+                            gameController.isIncorrect();
+
+                        }
+                    }
                 }
                 script.resetTransform();
             }
@@ -44,7 +65,10 @@ public class PressurePlateAngela : MonoBehaviour
     }
 
    public void SetCorrectId(int id)
-    { correctFoodId = id; }
+    {
+        roundStarted = true;
+        repeat = false;
+        correctFoodId = id; }
    
 
     void Start()
