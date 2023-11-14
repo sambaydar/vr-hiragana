@@ -1,4 +1,5 @@
 ﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -40,15 +41,19 @@ public class GameControllerAng : MonoBehaviour
         int foodId;
         for (int i = 0; i < repeatTimes; i++)
         {
-            
+            int count = 0;
             while (true)
             {
-                foodId = UnityEngine.Random.Range(0, TotalFoods-1);
+                foodId = UnityEngine.Random.Range(0, TotalFoods);
                 if (!elements.Contains(foodId))
                 {
+                    count++;
                     elements.Add(foodId);
+                    UnityEngine.Debug.Log(foodId);
+
                     break;
                 }
+              
             }
         }
         randomFoodsList = elements.ToArray();
@@ -65,6 +70,7 @@ public class GameControllerAng : MonoBehaviour
 
         if (currentRound < repeatTimes)
         {
+            
             presureplate.SetCorrectId(randomFoodsList[currentRound]);
             CurrSound.clip = requestAudios[randomFoodsList[currentRound]];
             UnityEngine.Debug.Log(randomFoodsList[currentRound]);

@@ -23083,7 +23083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   presureplate: {fileID: 1918938573}
-  repeatTimes: 1
+  repeatTimes: 6
   TotalFoods: 6
   requestAudios:
   - {fileID: 8300000, guid: bc9580d2419dc1b4296fbd7bf79caaa3, type: 3}

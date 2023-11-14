@@ -1,22 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class FoodClass : MonoBehaviour
 {
-    public Vector3 minimum = new Vector3(-4.8f, 0.8f,-1.2f);
-    public Vector3 max= new Vector3(-1.5f, 2.8f, 2.2f);
-    //void Update()
-    //{
-    //    if(gameObject.transform.position.y < minimum.y || gameObject.transform.position.x < minimum.x|| gameObject.transform.position.z < minimum.z)
-    //    {
-    //        resetTransform();
-    //    }
-    //    if(gameObject.transform.position.y > max.y || gameObject.transform.position.x > max.x || gameObject.transform.position.z > max.z)
-    //    {
-    //        resetTransform();
-    //    }
-    //}
+    private Vector3 minimum = new Vector3(-4.8f, 0.8f,-1.2f);
+    private Vector3 max= new Vector3(-1.5f, 2.8f, 2.2f);
+    void Update()
+    {
+        if (gameObject.transform.position.y < minimum.y || gameObject.transform.position.x < minimum.x || gameObject.transform.position.z < minimum.z)
+        {
+            resetTransform();
+            UnityEngine.Debug.Log("Min");
+        }
+        if (gameObject.transform.position.y > max.y || gameObject.transform.position.x > max.x || gameObject.transform.position.z > max.z)
+        {
+            UnityEngine.Debug.Log("Max");
+
+            resetTransform();
+        }
+    }
     public int FoodId;
     public Vector3 initialPos;
     public Quaternion intialRot;
@@ -25,6 +29,9 @@ public class FoodClass : MonoBehaviour
     {
         initialPos = gameObject.transform.position;
         intialRot= gameObject.transform.rotation;
+
+
+
     }
     public void resetTransform()
     {
