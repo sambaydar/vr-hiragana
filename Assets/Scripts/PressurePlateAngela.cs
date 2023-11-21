@@ -13,14 +13,14 @@ public class PressurePlateAngela : MonoBehaviour
     private int correctFoodId=-1;
     private AudioSource CurrSound;
     public GameControllerAng gameController;
-    
+    private bool round= true;
     void OnTriggerEnter(Collider other) {
         //UnityEngine.Debug.Log(other.gameObject.name);
         if (correctFoodId>-1)
         { 
             if (other.gameObject.tag == "food") {
                 FoodClass script= other.gameObject.GetComponent<FoodClass>();
-                if (script.FoodId== correctFoodId )
+                if (script.FoodId== correctFoodId && round)
                 {
                     UnityEngine.Debug.Log("entered" );
                     CurrSound.clip = CorrectSound;
@@ -36,6 +36,8 @@ public class PressurePlateAngela : MonoBehaviour
                         gameController.isIncorrect();
                 }
                 script.resetTransform();
+                round = false;
+
             }
         }
         else
@@ -46,8 +48,10 @@ public class PressurePlateAngela : MonoBehaviour
 
    public void SetCorrectId(int id)
     {
-        correctFoodId = id; }
-   
+        correctFoodId = id;
+        round = true;
+    }
+
 
     void Start()
     {

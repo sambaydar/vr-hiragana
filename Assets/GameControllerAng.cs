@@ -16,7 +16,6 @@ public class GameControllerAng : MonoBehaviour
     private bool repeat= true;
     private int[] randomFoodsList;
     private bool[] foodResults;
-
     private AudioSource CurrSound;
 
     public GameObject StartUI;
@@ -25,6 +24,8 @@ public class GameControllerAng : MonoBehaviour
     public GameObject CorrectUI;
     public GameObject ResultsText;
     public GameObject RepeatUI;
+    public GameObject ProcessUI;
+    public TMPro.TextMeshProUGUI ProcessText;
 
     // Start is called before the first frame update
     void Start()
@@ -65,7 +66,13 @@ public class GameControllerAng : MonoBehaviour
 
     public void roundStarts()
     {
-        repeat= true;
+        if(!ProcessUI.activeSelf)
+        {
+            ProcessUI.SetActive(true);
+
+        }
+        ProcessText.text = currentRound + "/" + repeatTimes;
+        repeat = true;
 
 
         if (currentRound < repeatTimes)
@@ -135,6 +142,7 @@ public class GameControllerAng : MonoBehaviour
         ResultsText.GetComponent<TMPro.TextMeshProUGUI>().text = resultsText;
         ResultsUI.SetActive(true);
         RepeatUI.SetActive(false);
+        ProcessUI.SetActive(false);
     }
     public void repeatAudio()
     {
