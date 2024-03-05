@@ -19,8 +19,11 @@ public class FoodClass : MonoBehaviour
         initialPos = gameObject.transform.position;
         intialRot = gameObject.transform.rotation;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
+
         firstime = false;
         grabbablesc = GetComponent<XRGrabInteractable>() ;
+        grabbablesc.enabled = true;
+
     }
     void OnEnable()
     {
@@ -40,12 +43,13 @@ public class FoodClass : MonoBehaviour
     }
     public void resetpos()
     {
-
+        grabbablesc.enabled = false;
         gameObject.transform.position= initialPos ;
         gameObject.transform.rotation= intialRot ;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
+        grabbablesc.enabled = true;
     }
-        public void resetTransform()
+    public void resetTransform()
     {
         if (!die)
         {
@@ -57,9 +61,10 @@ public class FoodClass : MonoBehaviour
     IEnumerator resetTransformCoroutine()
     {
         yield return new WaitForSeconds(2f);
-        
+
+        grabbablesc.enabled = false;
+        // for now it's like this but actually I may not need to insstantiate, this is going to make the CPU consumption lower I just need to deactivate the xr grabbable.. 
         GameObject newFood = Instantiate(this.gameObject, initialPos, intialRot, gameObject.transform.parent.gameObject.transform);
-        grabbablesc.enabled = false; 
         FoodClass newFoodscript = newFood.GetComponent<FoodClass>();
         newFoodscript.FoodId = FoodId;
         
