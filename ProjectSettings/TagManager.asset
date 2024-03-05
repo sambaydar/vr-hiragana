@@ -46,6 +46,8 @@ TagManager:
   - kana_re
   - kana_ro
   - food
+  - CollideFood
+  - Hand
   layers:
   - Default
   - TransparentFX

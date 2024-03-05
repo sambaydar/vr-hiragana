@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
+
 using UnityEngine;
 
 public class GameControllerAng : MonoBehaviour
@@ -12,12 +12,18 @@ public class GameControllerAng : MonoBehaviour
     public int TotalFoods = 6;
     private int currentRound = 0;
     public AudioClip[] requestAudios;
-    public AudioClip[] FoodAudios;
+    public AudioClip[] thisIsAudios;
+    public AudioClip[] thisIsWrongAudios;
+
+    public AudioClip CorrectAudio;
+    public AudioClip IncorrectAudio;
+    public AudioClip onegaiaudio;
+
     private bool repeat= true;
     private int[] randomFoodsList;
     private bool[] foodResults;
     private AudioSource CurrSound;
-
+    private int[] foodAnswers;
     public GameObject StartUI;
     public GameObject ResultsUI;
     public GameObject IncorrectUI;
@@ -26,17 +32,28 @@ public class GameControllerAng : MonoBehaviour
     public GameObject RepeatUI;
     public GameObject ProcessUI;
     public TMPro.TextMeshProUGUI ProcessText;
+    public AudioClip thisis_audio;
+    public AudioClip not_audio;
+    public AudioClip Silence;
 
     // Start is called before the first frame update
     void Start()
     {
         foodResults = new bool[repeatTimes];
         CurrSound= gameObject.GetComponent<AudioSource>();
+        foodAnswers = new int[repeatTimes];    
     }
-
+    public void changeRepeatTimes(int repeatTimes)
+    {
+        this.repeatTimes = repeatTimes;
+        
+        foodResults = new bool[repeatTimes];
+        foodAnswers = new int[repeatTimes];
+    }
     public void GameStarts()
     {
-        currentRound = 0;
+        CurrSound.clip = null;
+       currentRound = 0;
         // Create the list of random elements that are going to go in this setting
         List<int> elements = new List<int>();
         int foodId;
@@ -50,15 +67,13 @@ public class GameControllerAng : MonoBehaviour
                 {
                     count++;
                     elements.Add(foodId);
-                    UnityEngine.Debug.Log(foodId);
-
                     break;
                 }
               
             }
         }
         randomFoodsList = elements.ToArray();
-
+       
         roundStarts();
 
 
@@ -72,56 +87,168 @@ public class GameControllerAng : MonoBehaviour
 
         }
         ProcessText.text = currentRound + "/" + repeatTimes;
-        repeat = true;
 
 
         if (currentRound < repeatTimes)
         {
-            
-            presureplate.SetCorrectId(randomFoodsList[currentRound]);
-            CurrSound.clip = requestAudios[randomFoodsList[currentRound]];
+
             UnityEngine.Debug.Log(randomFoodsList[currentRound]);
-            CurrSound.Play();
+
+            presureplate.SetCorrectId(randomFoodsList[currentRound]);
+            StartCoroutine(playEngineSound(currentRound));
         }
         else
         {
             GetResults();
+            StartCoroutine(endAudio());
+            //UnityEngine.Debug.Log(-1);
 
+            presureplate.SetCorrectId(-1);
             // finished
         }
 
     }
+    IEnumerator endAudio()
+    {
+        //UnityEngine.Debug.Log(thiscurrentRound);
+        
+            if (foodResults[foodResults.Length-1])
+            {
+                CurrSound.clip = CorrectAudio;
+            }
+            else
+            {
+                
+                // I could add here that this was not the asked food.
+                CurrSound.clip = IncorrectAudio;
+                
 
- 
+            }
+        CurrSound.Play();
+        yield return new WaitForSeconds(CurrSound.clip.length);
+        CurrSound.clip = Silence;
+    }
+    // We can add an audio saying that it's the end
+    //CurrSound.clip = endAudio;
+    //CurrSound.Play();
+
+    IEnumerator playEngineSound(int thiscurrentRound)
+    {
+        //UnityEngine.Debug.Log(thiscurrentRound);
+
+        // If there is previous answer.
+        if (thiscurrentRound > 0)
+        {
+           // correct answer previously
+            if (foodResults[thiscurrentRound - 1])
+            {
+                CurrSound.clip = CorrectAudio;
+                CurrSound.Play();
+                yield return new WaitForSeconds(CurrSound.clip.length);
+            }
+            // incorrect answer previously
+            else
+            {
+                CurrSound.clip = thisIsWrongAudios[randomFoodsList[thiscurrentRound]];
+                CurrSound.Play();
+                yield return new WaitForSeconds(CurrSound.clip.length+1f);
+
+                CurrSound.clip = thisIsAudios[foodAnswers[thiscurrentRound - 1]];
+                CurrSound.Play();
+                yield return new WaitForSeconds(CurrSound.clip.length);
+            }
+        }
+
+        // give me the plate please
+        CurrSound.clip = requestAudios[randomFoodsList[thiscurrentRound]];
+        CurrSound.Play();
+        yield return new WaitForSeconds(CurrSound.clip.length);
+
+
+
+    }
+    IEnumerator repeatAudio(int thiscurrentRound)
+    {
+
+        // This is incorrect food
+
+        CurrSound.clip = thisIsAudios[foodAnswers[thiscurrentRound]];
+        CurrSound.Play();
+        yield return new WaitForSeconds(CurrSound.clip.length +1f);
+        
+        // correct food please
+
+        CurrSound.clip = requestAudios[randomFoodsList[thiscurrentRound]];
+        CurrSound.Play();
+    }
+    IEnumerator repeatAudioWrong(int thiscurrentRound)
+    {
+        Debug.Log("id prev: "+ foodAnswers[thiscurrentRound]+" correct id: " +randomFoodsList[thiscurrentRound]);
+        // This is NOT correct food
+        CurrSound.clip = thisIsWrongAudios[randomFoodsList[thiscurrentRound]];
+        CurrSound.Play();
+        yield return new WaitForSeconds(CurrSound.clip.length + 1f);
+
+        // This is incorrect food
+
+        CurrSound.clip = thisIsAudios[foodAnswers[thiscurrentRound]];
+        CurrSound.Play();
+        yield return new WaitForSeconds(CurrSound.clip.length + 1f);
+
+        // correct food please
+
+        CurrSound.clip = requestAudios[randomFoodsList[thiscurrentRound]];
+        CurrSound.Play();
+    }
+    IEnumerator repeatAudioUI(int thiscurrentRound)
+    {
+
+
+        yield return new WaitForSeconds(0);
+        CurrSound.clip = requestAudios[randomFoodsList[thiscurrentRound]];
+        CurrSound.Play();
+        // correct food
+
+
+
+    }
+
+    public void repeatAudio()
+    {
+
+        StartCoroutine(repeatAudioUI(currentRound));
+    }
 
     //Called by preassurePlate to let the game know that the answer is right and it should go to the next round
-    public void isCorrect()
+    public void isCorrect(int entered)
     {
         UnityEngine.Debug.Log("isCorrect "+ currentRound);
         // mark it as correct
         foodResults[currentRound] = true;
+        foodAnswers[currentRound] = entered;
         currentRound++;
-
+        repeat = true;
         roundStarts();
 
     }
 
     //Called by preassurePlate to let the game know that the answer is wrong and it should repeat the sound or skip to the next one
-    public void isIncorrect()
+    public void isIncorrect(int entered)
     {
-        UnityEngine.Debug.Log("isIncorrect " + currentRound);
-
+        //UnityEngine.Debug.Log("isIncorrect " + " round: "+ currentRound + "repeat" + repeat);
         if (repeat)
         {
-            repeatAudio();
+            foodAnswers[currentRound] = entered;
+            StartCoroutine(repeatAudioWrong(currentRound));
             repeat = false;
         }
         else
         {
+            repeat = true;
             //sound that failed.
-            foodResults[currentRound]=false;
+            foodResults[currentRound]= false;
+            foodAnswers[currentRound] = entered;
             currentRound++;
-
             // next one and mark this as lost
             roundStarts();
         }
@@ -144,8 +271,8 @@ public class GameControllerAng : MonoBehaviour
         RepeatUI.SetActive(false);
         ProcessUI.SetActive(false);
     }
-    public void repeatAudio()
-    {
-        CurrSound.Play();
-    }
+    //public void repeatAudio()
+    //{
+    //    CurrSound.Play();
+    //}
 }

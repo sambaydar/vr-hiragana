@@ -16,15 +16,9 @@ public class ButtonTrigger : Button
     }
     private void OnTriggerEnter(Collider other)
     {
-        ExecuteEvents.Execute(gameObject, new PointerEventData(EventSystem.current),ExecuteEvents.submitHandler);
-        //UnityEngine.Debug.Log("entered");
-      
-
+        if(other.gameObject.tag== "Hand"){
+            ExecuteEvents.Execute(gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.submitHandler);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

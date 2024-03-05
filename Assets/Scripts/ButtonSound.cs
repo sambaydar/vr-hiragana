@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class ButtonSound : MonoBehaviour
 {
     private AudioSource CurrSound;
     public AudioClip StartSound;
-
+    private bool first = true;
+    public AudioClip Silence;
     // plays a sound when button is clicked
     void Start()
     {
@@ -15,9 +17,29 @@ public class ButtonSound : MonoBehaviour
         CurrSound.Play();
     }
 
-    void OnEnable() {
-        CurrSound.clip = StartSound;
+    void OnDisable()
+    {
+        
+            CurrSound.clip = Silence;
+        
+    }
+
+    void OnEnable()
+    {
+            if(first)
+        {
+            first = false;
+        }
+        else
+        {
+            CurrSound.clip = StartSound;
+
+        }
+
+    }
+    public void sound() {
+        
         CurrSound.Play();
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }

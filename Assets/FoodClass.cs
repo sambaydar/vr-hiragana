@@ -1,41 +1,62 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 
 public class FoodClass : MonoBehaviour
 {
-    private Vector3 minimum = new Vector3(-4.8f, 0.8f,-1.2f);
-    private Vector3 max= new Vector3(-1.5f, 2.8f, 2.2f);
-    void Update()
-    {
-        if (gameObject.transform.position.y < minimum.y || gameObject.transform.position.x < minimum.x || gameObject.transform.position.z < minimum.z)
-        {
-            resetTransform();
-            UnityEngine.Debug.Log("Min");
-        }
-        if (gameObject.transform.position.y > max.y || gameObject.transform.position.x > max.x || gameObject.transform.position.z > max.z)
-        {
-            UnityEngine.Debug.Log("Max");
 
-            resetTransform();
-        }
-    }
     public int FoodId;
     public Vector3 initialPos;
     public Quaternion intialRot;
+    private bool firstime = true;
+    private bool die= false;
     // Start is called before the first frame update
     void Start()
     {
         initialPos = gameObject.transform.position;
-        intialRot= gameObject.transform.rotation;
-
-
+        Debug.Log(initialPos);
+        intialRot = gameObject.transform.rotation;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        firstime = false;
 
     }
+    void OnEnable()
+    {
+        if(!firstime)
+        {
+            resetTransform();
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+    }
+
+        void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "CollideFood")
+        {
+            resetTransform();
+        }
+    }
+
     public void resetTransform()
     {
-        gameObject.transform.position= initialPos;
-        gameObject.transform.rotation = intialRot;
+        if (!die)
+        {
+            die = true;
+            StartCoroutine(resetTransformCoroutine());  
+        }
     }
+
+    IEnumerator resetTransformCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        GameObject newFood= Instantiate(this.gameObject, initialPos, intialRot, gameObject.transform.parent.gameObject.transform);
+        FoodClass newFoodscript = newFood.GetComponent<FoodClass>();
+        newFoodscript.FoodId = FoodId;
+        
+        Destroy(this.gameObject);
+
+    }
+
+    
 }

@@ -4,17 +4,23 @@ using System.Collections;
 
 public class ShowButton : MonoBehaviour
 {
-    public GameObject button;
+    public GameObject[] buttons;
     
     private void OnEnable()
     {
-        button.SetActive(false);
+        for (int i = 0; i < buttons.Length; i++) {
+            buttons[i].SetActive(false);
+        }
+        
         StartCoroutine(ShowButtonAfterDelay(2f));
     }
 
     private IEnumerator ShowButtonAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        button.SetActive(true);
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].SetActive(true);
+        }
     }
 }

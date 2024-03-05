@@ -7,38 +7,44 @@ using UnityEngine;
 // collided with the plate
 public class PressurePlateAngela : MonoBehaviour
 {
-    public AudioClip CorrectSound;
-    public AudioClip IncorrectSound;
+//    public AudioClip CorrectSound;
+//    public AudioClip IncorrectSound;
     public AnimationStateController asc;
     private int correctFoodId=-1;
-    private AudioSource CurrSound;
+    //private AudioSource CurrSound;
     public GameControllerAng gameController;
-    private bool round= true;
+    private int lastId;
     void OnTriggerEnter(Collider other) {
         //UnityEngine.Debug.Log(other.gameObject.name);
-        if (correctFoodId>-1)
-        { 
-            if (other.gameObject.tag == "food") {
-                FoodClass script= other.gameObject.GetComponent<FoodClass>();
-                if (script.FoodId== correctFoodId && round)
-                {
-                    UnityEngine.Debug.Log("entered" );
-                    CurrSound.clip = CorrectSound;
-                    CurrSound.Play();
-                    asc.ApprovalAnimation();
-                    gameController.isCorrect();
-                }
-                else {
-                    
-                        CurrSound.clip = IncorrectSound;
-                        CurrSound.Play();
-                        asc.RejectionAnimation();
-                        gameController.isIncorrect();
-                }
-                script.resetTransform();
-                round = false;
+        
+        if (other.gameObject.tag == "food") {
+        FoodClass script= other.gameObject.GetComponent<FoodClass>();
+            
 
+            if (correctFoodId > -1)
+            {
+                if(lastId != script.FoodId)
+                {
+                    lastId = script.FoodId;
+                    if (script.FoodId== correctFoodId)
+                    {
+                        
+                        UnityEngine.Debug.Log("entered" );
+                        //currsound.clip = correctsound;
+                        //CurrSound.Play();
+                        asc.ApprovalAnimation();
+                        gameController.isCorrect(script.FoodId);
+                    }
+                    else {
+                        //CurrSound.clip = IncorrectSound;
+                            //CurrSound.Play();
+                            asc.RejectionAnimation();
+                            gameController.isIncorrect(script.FoodId);
+                     }
+                 }
+                
             }
+            StartCoroutine(returnProduct(script));
         }
         else
         {
@@ -48,14 +54,22 @@ public class PressurePlateAngela : MonoBehaviour
 
    public void SetCorrectId(int id)
     {
+        lastId = -1;
         correctFoodId = id;
-        round = true;
+       
     }
 
+    IEnumerator returnProduct(FoodClass script)
+    {
+        yield return new WaitForSeconds(0f);
+        script.resetTransform();
+
+    }
 
     void Start()
     {
-        CurrSound = GetComponent<AudioSource>();
+        //CurrSound = GetComponent<AudioSource>();
+        
     }
 
 }
