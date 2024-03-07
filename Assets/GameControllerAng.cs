@@ -14,7 +14,6 @@ public class GameControllerAng : MonoBehaviour
     public AudioClip[] requestAudios;
     public AudioClip[] thisIsAudios;
     public AudioClip[] thisIsWrongAudios;
-
     public AudioClip CorrectAudio;
     public AudioClip IncorrectAudio;
     public AudioClip onegaiaudio;
@@ -35,6 +34,7 @@ public class GameControllerAng : MonoBehaviour
     public AudioClip thisis_audio;
     public AudioClip not_audio;
     public AudioClip Silence;
+    public GameObject confetti;
 
     // Start is called before the first frame update
     void Start()
@@ -108,6 +108,13 @@ public class GameControllerAng : MonoBehaviour
         }
 
     }
+    IEnumerator playConfetti()
+    {
+        confetti.SetActive(true);
+        yield return new WaitForSeconds(6f);
+        confetti.SetActive(false);
+    }
+
     IEnumerator endAudio()
     {
         //UnityEngine.Debug.Log(thiscurrentRound);
@@ -224,6 +231,7 @@ public class GameControllerAng : MonoBehaviour
     //Called by preassurePlate to let the game know that the answer is right and it should go to the next round
     public void isCorrect(int entered)
     {
+        StartCoroutine(playConfetti());
         UnityEngine.Debug.Log("isCorrect "+ currentRound);
         // mark it as correct
         foodResults[currentRound] = true;

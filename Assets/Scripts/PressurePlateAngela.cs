@@ -14,16 +14,18 @@ public class PressurePlateAngela : MonoBehaviour
     //private AudioSource CurrSound;
     public GameControllerAng gameController;
     private int lastId;
+    public GameObject UIPlateIndication;
     void OnTriggerEnter(Collider other) {
         //UnityEngine.Debug.Log(other.gameObject.name);
         
         if (other.gameObject.tag == "food") {
         FoodClass script= other.gameObject.GetComponent<FoodClass>();
-            
+            UIPlateIndication.SetActive(false);
 
             if (correctFoodId > -1)
             {
-                if(lastId != script.FoodId)
+                
+                if (lastId != script.FoodId)
                 {
                     lastId = script.FoodId;
                     if (script.FoodId== correctFoodId)
@@ -42,8 +44,8 @@ public class PressurePlateAngela : MonoBehaviour
                             gameController.isIncorrect(script.FoodId);
                      }
                  }
-                
             }
+            
             StartCoroutine(returnProduct(script));
         }
         else
@@ -54,9 +56,11 @@ public class PressurePlateAngela : MonoBehaviour
 
    public void SetCorrectId(int id)
     {
-        lastId = -1;
         correctFoodId = id;
-       
+        if(correctFoodId == -1)
+        {
+            UIPlateIndication.SetActive(true);
+        }       
     }
 
     IEnumerator returnProduct(FoodClass script)
