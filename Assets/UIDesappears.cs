@@ -18,12 +18,12 @@ public class UIDesappears : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        currentTime += Time.deltaTime;
-        if( currentTime > timeWaiting )
-        {
-            gameObject.SetActive(false);
-        }
-    }
+    //void Update()
+    //{
+    //    currentTime += Time.deltaTime;
+    //    if (currentTime > timeWaiting)
+    //    {
+    //        gameObject.SetActive(false);
+    //    }
+    //}
 }

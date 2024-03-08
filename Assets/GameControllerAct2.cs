@@ -24,9 +24,4 @@ public class GameControllerAct2 : MonoBehaviour
         yield return new WaitForSeconds(CurrSound.clip.length);
     }
 
-        // Update is called once per frame
-        void Update()
-    {
-        
-    }
 }
