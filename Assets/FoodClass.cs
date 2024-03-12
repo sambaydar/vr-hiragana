@@ -60,7 +60,7 @@ public class FoodClass : MonoBehaviour
 
     IEnumerator resetTransformCoroutine()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
 
         grabbablesc.enabled = false;
         // for now it's like this but actually I may not need to insstantiate, this is going to make the CPU consumption lower I just need to deactivate the xr grabbable.. 

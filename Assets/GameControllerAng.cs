@@ -159,7 +159,7 @@ public class GameControllerAng : MonoBehaviour
                 // thi is not prev. food
                 CurrSound.clip = thisIsWrongAudios[randomFoodsList[thiscurrentRound - 1]];
                 CurrSound.Play();
-                yield return new WaitForSeconds(CurrSound.clip.length+1f);
+                yield return new WaitForSeconds(CurrSound.clip.length);
                 // thi is prev. food answer
 
                 CurrSound.clip = thisIsAudios[foodAnswers[thiscurrentRound - 1]];
