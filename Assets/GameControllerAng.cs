@@ -32,9 +32,11 @@ public class GameControllerAng : MonoBehaviour
     public GameObject ProcessUI;
     public TMPro.TextMeshProUGUI ProcessText;
     public AudioClip thisis_audio;
+    public AudioClip goshisoosamadeshita;
+
     public AudioClip not_audio;
     public AudioClip Silence;
-    public GameObject confetti;
+    //public GameObject confetti;
 
     // Start is called before the first frame update
     void Start()
@@ -108,12 +110,12 @@ public class GameControllerAng : MonoBehaviour
         }
 
     }
-    IEnumerator playConfetti()
-    {
-        confetti.SetActive(true);
-        yield return new WaitForSeconds(6f);
-        confetti.SetActive(false);
-    }
+    //IEnumerator playConfetti()
+    //{
+        //confetti.SetActive(true);
+        //yield return new WaitForSeconds(6f);
+        //confetti.SetActive(false);
+    //}
 
     IEnumerator endAudio()
     {
@@ -133,7 +135,11 @@ public class GameControllerAng : MonoBehaviour
             }
         CurrSound.Play();
         yield return new WaitForSeconds(CurrSound.clip.length);
+        CurrSound.clip = goshisoosamadeshita;
+        CurrSound.Play();
+        yield return new WaitForSeconds(CurrSound.clip.length);
         CurrSound.clip = Silence;
+
     }
     // We can add an audio saying that it's the end
     //CurrSound.clip = endAudio;
@@ -153,7 +159,7 @@ public class GameControllerAng : MonoBehaviour
                 CurrSound.Play();
                 yield return new WaitForSeconds(CurrSound.clip.length);
             }
-            // incorrect answer previously
+            // incorrect answer previously and it's time for the next food.
             else
             {
                 // thi is not prev. food
@@ -165,6 +171,13 @@ public class GameControllerAng : MonoBehaviour
                 CurrSound.clip = thisIsAudios[foodAnswers[thiscurrentRound - 1]];
                 CurrSound.Play();
                 yield return new WaitForSeconds(CurrSound.clip.length);
+                // it's a shame 
+                CurrSound.clip = IncorrectAudio;
+                CurrSound.Play();
+                yield return new WaitForSeconds(CurrSound.clip.length);
+
+
+
             }
         }
 
@@ -231,7 +244,7 @@ public class GameControllerAng : MonoBehaviour
     //Called by preassurePlate to let the game know that the answer is right and it should go to the next round
     public void isCorrect(int entered)
     {
-        StartCoroutine(playConfetti());
+        //StartCoroutine(playConfetti());
         UnityEngine.Debug.Log("isCorrect "+ currentRound);
         // mark it as correct
         foodResults[currentRound] = true;
