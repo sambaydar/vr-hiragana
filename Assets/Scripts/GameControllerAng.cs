@@ -19,7 +19,7 @@ public class GameControllerAng : MonoBehaviour
     public AudioClip CorrectAudio;
     public AudioClip IncorrectAudio;
     public AudioClip onegaiaudio;
-
+    private List<GameObject> instantiatedObjects = new List<GameObject>();
     private bool repeat= true;
     private int[] randomFoodsList;
     private bool[] foodResults;
@@ -91,6 +91,7 @@ public class GameControllerAng : MonoBehaviour
         randomFoodsList = elements.ToArray();
         roundStarts();
     }
+
     public void handleObjects()
     {
         // If there are not enough positions, use only as many prefabs as there are positions
@@ -108,6 +109,7 @@ public class GameControllerAng : MonoBehaviour
 
         // Place the correct object at the randomly chosen position
         GameObject correctObject = Instantiate(prefabs[correctId], availablePositions[correctPositionIndex].position, Quaternion.identity);
+        instantiatedObjects.Add(correctObject); // Save reference to the instantiated object
 
         // Remove the used position
         availablePositions.RemoveAt(correctPositionIndex);
@@ -127,10 +129,21 @@ public class GameControllerAng : MonoBehaviour
 
             // Place the object
             GameObject randomObject = Instantiate(prefabs[randomId], availablePositions[i].position, Quaternion.identity);
+            instantiatedObjects.Add(randomObject); // Save reference to the instantiated object
 
             // Add to used IDs and remove the used position
             usedIds.Add(randomId);
         }
+    }
+
+    // Method to remove all objects when the round is over
+    public void clearObjects()
+    {
+        foreach (GameObject obj in instantiatedObjects)
+        {
+            Destroy(obj); // Remove the object from the scene
+        }
+        instantiatedObjects.Clear(); // Clear the list after destroying the objects
     }
 
     // Helper method to shuffle positions
@@ -144,10 +157,10 @@ public class GameControllerAng : MonoBehaviour
             list[randomIndex] = temp;
         }
     }
-
     public void roundStarts()
     {
-        if(!ProcessUI.activeSelf)
+        clearObjects();
+        if (!ProcessUI.activeSelf)
         {
             ProcessUI.SetActive(true);
 

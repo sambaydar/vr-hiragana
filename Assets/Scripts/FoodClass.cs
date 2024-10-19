@@ -54,17 +54,23 @@ public class FoodClass : MonoBehaviour
         if (!die)
         {
             die = true;
-            StartCoroutine(resetTransformCoroutine());  
+            if (this != null)
+            {
+                StartCoroutine(resetTransformCoroutine());
+            }
         }
     }
 
     IEnumerator resetTransformCoroutine()
     {
         yield return new WaitForSeconds(4f);
-
+        if (this == null)
+        {
+            yield break; // Stop the coroutine if the object no longer exists
+        }
         grabbablesc.enabled = false;
         // for now it's like this but actually I may not need to insstantiate, this is going to make the CPU consumption lower I just need to deactivate the xr grabbable.. 
-        GameObject newFood = Instantiate(this.gameObject, initialPos, intialRot, gameObject.transform.parent.gameObject.transform);
+        GameObject newFood = Instantiate(this.gameObject, initialPos, intialRot);
         FoodClass newFoodscript = newFood.GetComponent<FoodClass>();
         newFoodscript.FoodId = FoodId;
         
