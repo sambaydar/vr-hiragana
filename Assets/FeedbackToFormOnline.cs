@@ -60,6 +60,8 @@ public class FeedbackToFormOnline : MonoBehaviour
     public void SubmitFeedbackAssignment1(string data1, string data2, string data3,string data4)
     {
         StartCoroutine(PostAssignment1(data1, data2, data3,data4));
+        //Debug.Log("JSON says: " + data1+", "+ data2 + ", " + data3 + ", " + data4);
+
     }
 
     private IEnumerator PostAssignment1(string data1, string data2, string data3, string data4, FeedbackData feedbackData = null)

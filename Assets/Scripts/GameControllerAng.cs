@@ -43,11 +43,12 @@ public class GameControllerAng : MonoBehaviour
     public AudioClip Silence;
     //public GameObject confetti;
     public AnimationStateController characterController;
-    private string typeOfExam = "";
+    public string typeOfExam = "";
     public void changeTypeExam(GameObject[] list, string typeOfExam)
     {
         prefabs= list;
-        typeOfExam = typeOfExam;
+        this.typeOfExam = typeOfExam;
+        Debug.Log("saved" + this.typeOfExam);
     }
     // Start is called before the first frame update
     void Start()
@@ -402,9 +403,16 @@ public class GameControllerAng : MonoBehaviour
             {
                 feedbackSubmit = GameObject.Find("SendInfo").GetComponent<FeedbackToFormOnline>();
             }
-            feedbackSubmit.SubmitFeedbackAssignment1(textWrong, textRight, this.gameObject.name+ typeOfExam, textAttempts);
+        if (isExam)
+        {
+            feedbackSubmit.SubmitFeedbackAssignment1(textWrong, textRight, this.gameObject.name+"- "+ typeOfExam, textAttempts);
 
-            ResultsText.GetComponent<TMPro.TextMeshProUGUI>().text = resultsText;
+        }
+        else
+        {
+            feedbackSubmit.SubmitFeedbackAssignment1(textWrong, textRight, this.gameObject.name, textAttempts);
+        }
+        ResultsText.GetComponent<TMPro.TextMeshProUGUI>().text = resultsText;
         ResultsUI.SetActive(true);
         RepeatUI.SetActive(false);
         ProcessUI.SetActive(false);
