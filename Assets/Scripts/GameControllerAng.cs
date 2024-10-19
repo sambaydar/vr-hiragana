@@ -43,7 +43,12 @@ public class GameControllerAng : MonoBehaviour
     public AudioClip Silence;
     //public GameObject confetti;
     public AnimationStateController characterController;
-     
+    private string typeOfExam = "";
+    public void changeTypeExam(GameObject[] list, string typeOfExam)
+    {
+        prefabs= list;
+        typeOfExam = typeOfExam;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -361,17 +366,21 @@ public class GameControllerAng : MonoBehaviour
     void GetResults()
     {
         string resultsText = "できあがり\n";
-        for (int i = 0; i < foodResults.Length; i++)
+        if(!isExam)
         {
-            resultsText += (i + 1).ToString() + /*". " + hiraganaArray[chosenChars[i]] + */ "\t";
-            if (foodResults[i] == true)
-                resultsText += "\u2713"; // check
-            else
-                resultsText += "\u2717"; // x
-            resultsText += "\n";
+            for (int i = 0; i < foodResults.Length; i++)
+            {
+                resultsText += (i + 1).ToString() + /*". " + hiraganaArray[chosenChars[i]] + */ "\t";
+                if (foodResults[i] == true)
+                    resultsText += "\u2713"; // check
+                else
+                    resultsText += "\u2717"; // x
+                resultsText += "\n";
+            }
+
         }
 
-            string textRight = "";
+        string textRight = "";
             string textWrong = "";
 
             for (int i = 0; i < foodResults.Length; i++)
@@ -393,7 +402,7 @@ public class GameControllerAng : MonoBehaviour
             {
                 feedbackSubmit = GameObject.Find("SendInfo").GetComponent<FeedbackToFormOnline>();
             }
-            feedbackSubmit.SubmitFeedbackAssignment1(textWrong, textRight, this.gameObject.name, textAttempts);
+            feedbackSubmit.SubmitFeedbackAssignment1(textWrong, textRight, this.gameObject.name+ typeOfExam, textAttempts);
 
             ResultsText.GetComponent<TMPro.TextMeshProUGUI>().text = resultsText;
         ResultsUI.SetActive(true);
