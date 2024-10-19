@@ -10,7 +10,6 @@ public class PressurePlate : MonoBehaviour
     public AudioClip IncorrectSound;
     public GameObject CorrectUI;
     public GameObject IncorrectUI;
-    public AnimationStateController asc;
 
     private AudioSource CurrSound;
     private bool answerSubmitted;
@@ -23,13 +22,11 @@ public class PressurePlate : MonoBehaviour
                 CurrSound.Play();
                 CorrectUI.SetActive(true);
                 correct = true;
-                asc.ApprovalAnimation();
             } else {
                 CurrSound.clip = IncorrectSound;
                 CurrSound.Play();
                 IncorrectUI.SetActive(true);
                 correct = false;
-                asc.RejectionAnimation();
             }
         }
         answerSubmitted = true;

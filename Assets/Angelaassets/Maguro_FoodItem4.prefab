@@ -204,7 +204,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FoodId: 3
-  initialTransform: {fileID: 0}
+  initialPos: {x: 0, y: 0, z: 0}
+  intialRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1001 &4416041645245696852
 PrefabInstance:
   m_ObjectHideFlags: 0

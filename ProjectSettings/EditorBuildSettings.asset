@@ -6,11 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/AngelaVRPlayer/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Angela.unity
     guid: 7d71fabd756450e4d9c8c588c0c4a596
+  - enabled: 1
+    path: Assets/Scenes/Angela 1.unity
+    guid: 791f04ce9c6d0244bb357adcf020e550
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 0102db18eb48bfa44b8822795a620ca4, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 12d02154ec39fc6478354a14cb648953, type: 2}

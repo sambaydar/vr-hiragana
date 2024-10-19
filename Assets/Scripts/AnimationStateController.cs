@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnimationStateController : MonoBehaviour
 {
-    Animator animator;
+    public Animator animator;
 
     void Start()
     {
@@ -19,9 +19,10 @@ public class AnimationStateController : MonoBehaviour
         animator.SetTrigger("Approval");
     }
 
-    public void RejectionAnimation() {
+    public void RejectionAnimation()
+    {
         animator.SetTrigger("Rejection");
     }
-    
+
 
 }
