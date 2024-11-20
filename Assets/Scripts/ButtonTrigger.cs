@@ -9,6 +9,17 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(BoxCollider))]
 public class ButtonTrigger : Button
 {
+    // Enable the button
+    public void EnableButton()
+    {
+        this.interactable = true;
+    }
+
+    // Disable the button
+    public void DisableButton()
+    {
+        this.interactable = false;
+    }
     // Start is called before the first frame update
     void Start()
     {

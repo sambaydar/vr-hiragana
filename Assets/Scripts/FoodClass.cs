@@ -6,7 +6,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class FoodClass : MonoBehaviour
 {
-
     public int FoodId;
     public Vector3 initialPos;
     public Quaternion intialRot;
@@ -25,6 +24,7 @@ public class FoodClass : MonoBehaviour
         grabbablesc.enabled = true;
 
     }
+    
     void OnEnable()
     {
         if(!firstime)
@@ -63,20 +63,28 @@ public class FoodClass : MonoBehaviour
 
     IEnumerator resetTransformCoroutine()
     {
-        yield return new WaitForSeconds(4f);
+        
         if (this == null)
         {
             yield break; // Stop the coroutine if the object no longer exists
         }
         grabbablesc.enabled = false;
-        // for now it's like this but actually I may not need to insstantiate, this is going to make the CPU consumption lower I just need to deactivate the xr grabbable.. 
-        GameObject newFood = Instantiate(this.gameObject, initialPos, intialRot);
-        FoodClass newFoodscript = newFood.GetComponent<FoodClass>();
-        newFoodscript.FoodId = FoodId;
-        
-        Destroy(this.gameObject);
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Transform currentParent = this.transform.parent;
+        // Check if the parent still exists
+        if (currentParent != null)
+            {
+                // Instantiate with the same parent
+                GameObject newFood = Instantiate(this.gameObject, initialPos, intialRot, currentParent);
+            FoodClass newFoodscript = newFood.GetComponent<FoodClass>();
+            newFoodscript.FoodId = FoodId;
+        }
+        yield return new WaitForSeconds(4f);
 
+        Destroy(this.gameObject);
+     
     }
+    
 
     
 }

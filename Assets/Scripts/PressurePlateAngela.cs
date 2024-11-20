@@ -58,7 +58,8 @@ public class PressurePlateAngela : MonoBehaviour
    public void SetCorrectId(int id)
     {
         correctFoodId = id;
-        if(correctFoodId == -1)
+        lastId = -1;
+        if (correctFoodId == -1)
         {
             UIPlateIndication.SetActive(true);
         }       
@@ -66,9 +67,8 @@ public class PressurePlateAngela : MonoBehaviour
 
     IEnumerator returnProduct(FoodClass script)
     {
-        yield return new WaitForSeconds(0f);
         script.resetTransform();
-        lastId = -1;
+        yield return new WaitForSeconds(0f);
     }
 
     void Start()

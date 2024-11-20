@@ -19,7 +19,7 @@ public class IntroLogic : MonoBehaviour
     }
     IEnumerator endAudio()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(10f);
 
         LeeAudio.clip = IntroAudio;
         LeeAudio.Play();

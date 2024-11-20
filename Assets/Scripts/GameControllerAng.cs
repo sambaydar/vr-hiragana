@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class GameControllerAng : MonoBehaviour
 {
-    public bool isExam=false;
+    public bool isExam = false;
     public PressurePlateAngela presureplate;
     public int repeatTimes = 1;
     public int TotalFoods = 6;
@@ -19,8 +19,8 @@ public class GameControllerAng : MonoBehaviour
     public AudioClip CorrectAudio;
     public AudioClip IncorrectAudio;
     public AudioClip onegaiaudio;
-    private List<GameObject> instantiatedObjects = new List<GameObject>();
-    private bool repeat= true;
+    private GameObject fatherofinstantiatedObjects;
+    private bool repeat = true;
     private int[] randomFoodsList;
     private bool[] foodResults;
     private List<KeyValuePair<string, string>> duplaListWrongAttempts;
@@ -41,12 +41,17 @@ public class GameControllerAng : MonoBehaviour
     public FeedbackToFormOnline feedbackSubmit;
     public AudioClip not_audio;
     public AudioClip Silence;
+    public GameObject[] badges;
+    public ButtonTrigger[] buttonTrigger_exam;
+    public GameObject[] ExamActivates;
+    public GameObject[] ExamDeactivates;
+
     //public GameObject confetti;
     public AnimationStateController characterController;
     public string typeOfExam = "";
     public void changeTypeExam(GameObject[] list, string typeOfExam)
     {
-        prefabs= list;
+        prefabs = list;
         this.typeOfExam = typeOfExam;
         Debug.Log("saved" + this.typeOfExam);
     }
@@ -64,15 +69,30 @@ public class GameControllerAng : MonoBehaviour
     public void changeRepeatTimes(int repeatTimes)
     {
         this.repeatTimes = repeatTimes;
-        
+
         foodResults = new bool[repeatTimes];
         foodAnswers = new int[repeatTimes];
+    }
+    public void createFatherforObjects()
+    {
+        // Create a new empty GameObject
+        fatherofinstantiatedObjects = new GameObject("EmptyFather");
+
+        // Set the current GameObject (this.transform) as the parent of the new empty GameObject
+        fatherofinstantiatedObjects.transform.SetParent(this.transform);
+
+        // Optionally, reset the local position, rotation, and scale of the new child
+        fatherofinstantiatedObjects.transform.localPosition = Vector3.zero;
+        fatherofinstantiatedObjects.transform.localRotation = Quaternion.identity;
+        fatherofinstantiatedObjects.transform.localScale = Vector3.one;
+
+
     }
     public void GameStarts()
     {
         duplaListWrongAttempts = new List<KeyValuePair<string, string>>();
         CurrSound.clip = null;
-       currentRound = 0;
+        currentRound = 0;
         // Create the list of random elements that are going to go in this setting
         List<int> elements = new List<int>();
         HashSet<int> usedElements = new HashSet<int>();
@@ -115,7 +135,8 @@ public class GameControllerAng : MonoBehaviour
 
         // Place the correct object at the randomly chosen position
         GameObject correctObject = Instantiate(prefabs[correctId], availablePositions[correctPositionIndex].position, Quaternion.identity);
-        instantiatedObjects.Add(correctObject); // Save reference to the instantiated object
+        correctObject.transform.SetParent(fatherofinstantiatedObjects.transform);
+
 
         // Remove the used position
         availablePositions.RemoveAt(correctPositionIndex);
@@ -135,7 +156,7 @@ public class GameControllerAng : MonoBehaviour
 
             // Place the object
             GameObject randomObject = Instantiate(prefabs[randomId], availablePositions[i].position, Quaternion.identity);
-            instantiatedObjects.Add(randomObject); // Save reference to the instantiated object
+            randomObject.transform.SetParent(fatherofinstantiatedObjects.transform);
 
             // Add to used IDs and remove the used position
             usedIds.Add(randomId);
@@ -145,11 +166,9 @@ public class GameControllerAng : MonoBehaviour
     // Method to remove all objects when the round is over
     public void clearObjects()
     {
-        foreach (GameObject obj in instantiatedObjects)
-        {
-            Destroy(obj); // Remove the object from the scene
+        if (fatherofinstantiatedObjects != null) {
+            Destroy(fatherofinstantiatedObjects);
         }
-        instantiatedObjects.Clear(); // Clear the list after destroying the objects
     }
 
     // Helper method to shuffle positions
@@ -166,6 +185,8 @@ public class GameControllerAng : MonoBehaviour
     public void roundStarts()
     {
         clearObjects();
+        createFatherforObjects();
+
         if (!ProcessUI.activeSelf)
         {
             ProcessUI.SetActive(true);
@@ -184,6 +205,8 @@ public class GameControllerAng : MonoBehaviour
         }
         else
         {
+            clearObjects();
+
             GetResults();
             StartCoroutine(endAudio());
             //UnityEngine.Debug.Log(-1);
@@ -195,27 +218,27 @@ public class GameControllerAng : MonoBehaviour
     }
     //IEnumerator playConfetti()
     //{
-        //confetti.SetActive(true);
-        //yield return new WaitForSeconds(6f);
-        //confetti.SetActive(false);
+    //confetti.SetActive(true);
+    //yield return new WaitForSeconds(6f);
+    //confetti.SetActive(false);
     //}
 
     IEnumerator endAudio()
     {
         //UnityEngine.Debug.Log(thiscurrentRound);
-        
-            if (foodResults[foodResults.Length-1])
-            {
-                CurrSound.clip = CorrectAudio;
-            }
-            else
-            {
-                
-                // I could add here that this was not the asked food.
-                CurrSound.clip = IncorrectAudio;
-                
 
-            }
+        if (foodResults[foodResults.Length - 1])
+        {
+            CurrSound.clip = CorrectAudio;
+        }
+        else
+        {
+
+            // I could add here that this was not the asked food.
+            CurrSound.clip = IncorrectAudio;
+
+
+        }
         CurrSound.Play();
         yield return new WaitForSeconds(CurrSound.clip.length);
         CurrSound.clip = goshisoosamadeshita;
@@ -235,7 +258,7 @@ public class GameControllerAng : MonoBehaviour
         // If there is previous answer.
         if (thiscurrentRound > 0)
         {
-           // correct answer previously
+            // correct answer previously
             if (foodResults[thiscurrentRound - 1])
             {
                 CurrSound.clip = CorrectAudio;
@@ -279,8 +302,8 @@ public class GameControllerAng : MonoBehaviour
 
         CurrSound.clip = thisIsAudios[foodAnswers[thiscurrentRound]];
         CurrSound.Play();
-        yield return new WaitForSeconds(CurrSound.clip.length +1f);
-        
+        yield return new WaitForSeconds(CurrSound.clip.length + 1f);
+
         // correct food please
 
         CurrSound.clip = requestAudios[randomFoodsList[thiscurrentRound]];
@@ -288,7 +311,7 @@ public class GameControllerAng : MonoBehaviour
     }
     IEnumerator repeatAudioWrong(int thiscurrentRound)
     {
-        Debug.Log("id prev: "+ foodAnswers[thiscurrentRound]+" correct id: " +randomFoodsList[thiscurrentRound]);
+        Debug.Log("id prev: " + foodAnswers[thiscurrentRound] + " correct id: " + randomFoodsList[thiscurrentRound]);
         // This is NOT correct food
         CurrSound.clip = thisIsWrongAudios[randomFoodsList[thiscurrentRound]];
         CurrSound.Play();
@@ -313,9 +336,6 @@ public class GameControllerAng : MonoBehaviour
         CurrSound.clip = requestAudios[randomFoodsList[thiscurrentRound]];
         CurrSound.Play();
         // correct food
-
-
-
     }
 
     public void repeatAudio()
@@ -329,7 +349,7 @@ public class GameControllerAng : MonoBehaviour
     {
         characterController.ApprovalAnimation();
         //StartCoroutine(playConfetti());
-        UnityEngine.Debug.Log("isCorrect "+ currentRound);
+        UnityEngine.Debug.Log("isCorrect " + currentRound);
         // mark it as correct
         foodResults[currentRound] = true;
         foodAnswers[currentRound] = entered;
@@ -356,7 +376,7 @@ public class GameControllerAng : MonoBehaviour
         {
             repeat = true;
             //sound that failed.
-            foodResults[currentRound]= false;
+            foodResults[currentRound] = false;
             // THIS NEEDS TO CHANGE TO GET THE CURRENT ONE. 
             foodAnswers[currentRound] = entered;
             currentRound++;
@@ -364,8 +384,47 @@ public class GameControllerAng : MonoBehaviour
             roundStarts();
         }
     }
+    IEnumerator getbadge() 
+        {
+        // give badget acording to exam type
+        if(typeOfExam== "visual")
+        {
+            Instantiate(badges[0]);
+            if (buttonTrigger_exam[0]!=null)
+            {
+                buttonTrigger_exam[0].DisableButton();
+            }
+
+
+        }
+        if (typeOfExam == "names")
+        {
+            if (buttonTrigger_exam[1] != null)
+            {
+                buttonTrigger_exam[1].DisableButton();
+            }
+            Instantiate(badges[1]);
+        }
+
+        yield return new WaitForSeconds(10f);
+        if (ExamActivates !=null) { 
+            for (int i = 0;i<ExamActivates.Length; i++)
+            {
+                ExamActivates[i].SetActive(true);
+            }
+        }
+        if (ExamDeactivates != null)
+        {
+            for (int i = 0; i < ExamDeactivates.Length; i++)
+            {
+                ExamDeactivates[i].SetActive(false);
+
+            }
+        }
+    }
     void GetResults()
     {
+        clearObjects();
         string resultsText = "できあがり\n";
         if(!isExam)
         {
@@ -378,8 +437,9 @@ public class GameControllerAng : MonoBehaviour
                     resultsText += "\u2717"; // x
                 resultsText += "\n";
             }
-
+            ResultsUI.SetActive(true);
         }
+        
 
         string textRight = "";
             string textWrong = "";
@@ -399,6 +459,55 @@ public class GameControllerAng : MonoBehaviour
         textWrong= textWrong.TrimEnd(' ', ',');
         textRight = textRight.TrimEnd(' ', ',');
         string textAttempts = DuplaListToString();
+        if (textAttempts == "" && isExam )
+        {
+            // give badge
+                // first element is going to be the badge
+               
+            StartCoroutine(getbadge());
+
+
+
+        }
+        else if(textAttempts != "" && isExam)
+        {
+            string newnames = "";
+            string tempname = "";
+            foreach (var pair in duplaListWrongAttempts)
+            {
+                if(tempname!= pair.Key)
+                {
+                    newnames += pair.Key+",";
+                    tempname = pair.Key;
+                }
+            }
+            textWrong = textWrong.TrimEnd(' ', ',');
+
+            string[] names = newnames.Split(',');
+            string currentLine = "";
+            // give other feedback saying that it is wrong. Every 16 letters 
+            resultsText += "\n You got wrong:\n";
+            foreach (string name in names)
+            {
+
+                string trimmedName = name.Trim(); // Remove any extra spaces around the name
+
+                // Check if adding this name would exceed the max line length
+                if (currentLine.Length + trimmedName.Length + 2 > 16) // +2 for comma and space
+                {
+                    // If so, add the current line to resultsText and start a new line
+                    resultsText += currentLine.TrimEnd() + "\n";
+                    currentLine = ""; // Reset currentLine for the new line
+                }
+                currentLine += trimmedName + ", ";
+            }
+                if (currentLine.Length > 0)
+                {
+                    resultsText += currentLine.TrimEnd(',', ' ') + "\n";
+                }
+
+                ResultsUI.SetActive(true);
+        }
         if (!feedbackSubmit)
             {
                 feedbackSubmit = GameObject.Find("SendInfo").GetComponent<FeedbackToFormOnline>();
@@ -413,7 +522,7 @@ public class GameControllerAng : MonoBehaviour
             feedbackSubmit.SubmitFeedbackAssignment1(textWrong, textRight, this.gameObject.name, textAttempts);
         }
         ResultsText.GetComponent<TMPro.TextMeshProUGUI>().text = resultsText;
-        ResultsUI.SetActive(true);
+        
         RepeatUI.SetActive(false);
         ProcessUI.SetActive(false);
         duplaListWrongAttempts.Clear();
