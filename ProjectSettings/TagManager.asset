@@ -3,51 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - kana_a
-  - kana_i
-  - kana_u
-  - kana_o
-  - kana_e
-  - kana_ta
-  - kana_te
-  - kana_to
-  - kana_chi
-  - kana_tsu
-  - kana_sa
-  - kana_su
-  - kana_se
-  - kana_shi
-  - kana_so
-  - kana_ka
-  - kana_ku
-  - kana_ki
-  - kana_ke
-  - kana_ko
-  - botCam
-  - kana_ha
-  - kana_fu
-  - kana_hi
-  - kana_he
-  - kana_ho
-  - kana_na
-  - kana_nu
-  - kana_ni
-  - kana_ne
-  - kana_no
-  - kana_ma
-  - kana_mu
-  - kana_mi
-  - kana_me
-  - kana_mo
-  - kana_ra
-  - kana_ru
-  - kana_ri
-  - kana_re
-  - kana_ro
-  - food
-  - CollideFood
-  - Hand
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -55,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - FoodItems
+  - 
   - 
   - 
   - 

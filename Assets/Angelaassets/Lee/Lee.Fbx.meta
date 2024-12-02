@@ -884,7 +884,7 @@ ModelImporter:
     - name: CC_Base_L_Mid2
       parentName: 
       position: {x: -0.0000003862381, y: 0.050364226, z: -0.000000038146972}
-      rotation: {x: -0.0064600594, y: -0.003481278, z: 0.0043562087, w: 0.9999636}
+      rotation: {x: -0.006460059, y: -0.003481278, z: 0.0043562083, w: 0.9999636}
       scale: {x: 0.99999976, y: 0.99999994, z: 1}
     - name: CC_Base_L_Mid3
       parentName: 

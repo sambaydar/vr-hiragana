@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Std_Eye_Occlusion_L
-  m_Shader: {fileID: 4800000, guid: fd50ac59639bb2a41a4d7e5c855dea2b, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: e11e1541751f73a4bbdc03b071617a93, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _ENABLE_FOG_ON_TRANSPARENT
@@ -40,7 +40,19 @@ Material:
   - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BottomCurve: 2
@@ -59,6 +71,8 @@ Material:
     - _OcclusionStrength2: 0.76630944
     - _OuterMax: 0.6
     - _OuterMin: 0.2
+    - _QueueControl: 1
+    - _QueueOffset: 0
     - _TearDuctPosition: 0.8
     - _TearDuctWidth: 0.5
     - _Top2Max: 1
