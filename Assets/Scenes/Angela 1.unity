@@ -15987,7 +15987,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 239214129269203184, guid: 672ea3f512e61404fb7ea15517dcdcf0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 583791570707823178, guid: 672ea3f512e61404fb7ea15517dcdcf0, type: 3}
       propertyPath: m_RootOrder
@@ -16007,7 +16007,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 583791570707823178, guid: 672ea3f512e61404fb7ea15517dcdcf0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5347
+      value: -3.627
       objectReference: {fileID: 0}
     - target: {fileID: 583791570707823178, guid: 672ea3f512e61404fb7ea15517dcdcf0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -16015,7 +16015,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 583791570707823178, guid: 672ea3f512e61404fb7ea15517dcdcf0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.2834
+      value: 0.337
       objectReference: {fileID: 0}
     - target: {fileID: 583791570707823178, guid: 672ea3f512e61404fb7ea15517dcdcf0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -48564,7 +48564,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7179462289238023466, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.57
+      value: -3.575
       objectReference: {fileID: 0}
     - target: {fileID: 7179462289238023466, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -48572,7 +48572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7179462289238023466, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.59
+      value: 0.595
       objectReference: {fileID: 0}
     - target: {fileID: 7179462289238023466, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -60509,7 +60509,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2128694561
 Transform:
   m_ObjectHideFlags: 0
