@@ -35,7 +35,8 @@ public class IntroLogic : MonoBehaviour
 
         foreach (GameObject item in nextStep)
         {
-            item.SetActive(true);
+            item.SetActive(true); 
+            Debug.Log("is activating "+this.gameObject.name+" ");
         }
         foreach (GameObject item2 in currentStep)
         {

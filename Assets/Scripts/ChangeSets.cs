@@ -19,7 +19,7 @@ public class ChangeSets : MonoBehaviour
         mybuttons[1].interactable = true;
     }
 
-    void changeSet(int set)
+   public void changeSet(int set)
     {
         if (set== 0)
         {
@@ -29,7 +29,7 @@ public class ChangeSets : MonoBehaviour
             mybuttons[1].interactable = true;
 
         }
-        else if (set == 0)
+        else if (set ==1)
         {
             set1.SetActive(false);
             set2.SetActive(true);
