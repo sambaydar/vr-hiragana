@@ -59,11 +59,11 @@ public class FeedbackToFormOnline : MonoBehaviour
     void Update()
     {
 
+            // Update the time variable to the Oculus Quest local time
+        time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         
         if (send)
         {
-            // Update the time variable to the Oculus Quest local time
-        time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         
             SubmitFeedbackAssignment1(data1, data2, data3, data4);
             send = false;
