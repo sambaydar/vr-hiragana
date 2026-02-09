@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class GameControllerAng : MonoBehaviour
 {
+    public bool set2 = true;
     public bool isExam = false;
     public PressurePlateAngela presureplate;
     public int repeatTimes = 1;
@@ -34,6 +35,7 @@ public class GameControllerAng : MonoBehaviour
     public GameObject CorrectUI;
     public GameObject ResultsText;
     public GameObject RepeatUI;
+    public GameObject ExitActivityUI;
     public GameObject ProcessUI;
     public TMPro.TextMeshProUGUI ProcessText;
     public AudioClip thisis_audio;
@@ -60,6 +62,10 @@ public class GameControllerAng : MonoBehaviour
     {
         foodResults = new bool[repeatTimes];
         foodAnswers = new int[repeatTimes];
+        for (int i = 0; i < foodAnswers.Length; i++)
+        {
+            foodAnswers[i] = -1;
+        }
         duplaListWrongAttempts = new List<KeyValuePair<string, string>>();
         if (!feedbackSubmit)
         {
@@ -72,6 +78,14 @@ public class GameControllerAng : MonoBehaviour
 
         foodResults = new bool[repeatTimes];
         foodAnswers = new int[repeatTimes];
+        for (int i = 0; i < foodAnswers.Length; i++)
+        {
+            foodAnswers[i] = -1;
+        }
+        if (set2)
+        {
+            TotalFoods = 12; // Second half of 24 elements
+        }
     }
     public void createFatherforObjects()
     {
@@ -96,16 +110,19 @@ public class GameControllerAng : MonoBehaviour
         // Create the list of random elements that are going to go in this setting
         List<int> elements = new List<int>();
         HashSet<int> usedElements = new HashSet<int>();
-        int foodId;
+         int foodId;
+        int startIndex = set2 ? 12 : 0; // Start from the second half if set2 is true
+        int endIndex = set2 ? 24 : TotalFoods; // End at the second half if set2 is true
+
         while (elements.Count < repeatTimes)
         {
-            if (usedElements.Count >= TotalFoods) // All elements have been used, reset the set
+            if (usedElements.Count >= (endIndex - startIndex)) // All elements have been used, reset the set
             {
                 usedElements.Clear();
             }
 
-            // Generate a random foodId
-            foodId = UnityEngine.Random.Range(0, TotalFoods);
+            // Generate a random foodId within the specified range
+            foodId = UnityEngine.Random.Range(startIndex, endIndex);
 
             // Add to elements if not already used in this set
             if (!usedElements.Contains(foodId))
@@ -118,17 +135,18 @@ public class GameControllerAng : MonoBehaviour
         roundStarts();
     }
 
+
     public void handleObjects()
     {
         // If there are not enough positions, use only as many prefabs as there are positions
         int objectCount = Mathf.Min(prefabs.Length, positions_prefabs.Length);
 
-        // Get the correct object's ID for this round
-        int correctId = randomFoodsList[currentRound];
-
         // Create a list of positions and shuffle it to randomize where objects will be placed
         List<Transform> availablePositions = positions_prefabs.ToList();
         Shuffle(availablePositions);
+
+        // Get the correct object's ID for this round
+        int correctId = randomFoodsList[currentRound];
 
         // Randomly choose one of the positions for the correct object
         int correctPositionIndex = UnityEngine.Random.Range(0, availablePositions.Count);
@@ -136,7 +154,6 @@ public class GameControllerAng : MonoBehaviour
         // Place the correct object at the randomly chosen position
         GameObject correctObject = Instantiate(prefabs[correctId], availablePositions[correctPositionIndex].position, Quaternion.identity);
         correctObject.transform.SetParent(fatherofinstantiatedObjects.transform);
-
 
         // Remove the used position
         availablePositions.RemoveAt(correctPositionIndex);
@@ -150,9 +167,9 @@ public class GameControllerAng : MonoBehaviour
             // Ensure that the same prefab is not placed twice (unless necessary)
             do
             {
-                randomId = UnityEngine.Random.Range(0, prefabs.Length);
+                randomId = UnityEngine.Random.Range(set2 ? 12 : 0, set2 ? 24 : 12); // Generate IDs based on the set
             }
-            while (usedIds.Contains(randomId) && usedIds.Count < prefabs.Length);
+            while (usedIds.Contains(randomId) && usedIds.Count < (set2 ? 12 : 12));
 
             // Place the object
             GameObject randomObject = Instantiate(prefabs[randomId], availablePositions[i].position, Quaternion.identity);
@@ -205,7 +222,6 @@ public class GameControllerAng : MonoBehaviour
         }
         else
         {
-            clearObjects();
 
             GetResults();
             StartCoroutine(endAudio());
@@ -222,7 +238,19 @@ public class GameControllerAng : MonoBehaviour
     //yield return new WaitForSeconds(6f);
     //confetti.SetActive(false);
     //}
+    public void endGame()
+    {
+            handleObjects();
 
+                    clearObjects();
+
+            GetResults();
+            // StartCoroutine(endAudio());
+            //UnityEngine.Debug.Log(-1);
+
+            presureplate.SetCorrectId(-1);
+
+    }
     IEnumerator endAudio()
     {
         //UnityEngine.Debug.Log(thiscurrentRound);
@@ -430,6 +458,8 @@ public class GameControllerAng : MonoBehaviour
         {
             for (int i = 0; i < foodResults.Length; i++)
             {
+                if (foodAnswers[i] == -1)
+                    break;
                 resultsText += (i + 1).ToString() + /*". " + hiraganaArray[chosenChars[i]] + */ "\t";
                 if (foodResults[i] == true)
                     resultsText += "\u2713"; // check
@@ -446,6 +476,8 @@ public class GameControllerAng : MonoBehaviour
 
             for (int i = 0; i < foodResults.Length; i++)
             {
+                  if (foodAnswers[i] == -1)
+                    break;
                 if(foodResults[i] == true )
                 {
                     textRight= textRight+ names[randomFoodsList[i]] + ",";
@@ -463,10 +495,10 @@ public class GameControllerAng : MonoBehaviour
         {
             // give badge
                 // first element is going to be the badge
-               
-            StartCoroutine(getbadge());
+               resultsText += "\n \n かんぺき！ \n";
+            // StartCoroutine(getbadge());
 
-
+ResultsUI.SetActive(true);
 
         }
         else if(textAttempts != "" && isExam)
@@ -524,6 +556,7 @@ public class GameControllerAng : MonoBehaviour
         ResultsText.GetComponent<TMPro.TextMeshProUGUI>().text = resultsText;
         
         RepeatUI.SetActive(false);
+        // ExitActivityUI.SetActive(false);
         ProcessUI.SetActive(false);
         duplaListWrongAttempts.Clear();
     }

@@ -827,6 +827,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ButtonActionReset",
+                    "type": "Button",
+                    "id": "4a4b6f73-d7e4-41bc-b041-3f9d227f0915",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1005,6 +1014,17 @@
                     "action": "Translate Anchor",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "043034db-a983-4f48-957b-5171b2bbbdc9",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ButtonActionReset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

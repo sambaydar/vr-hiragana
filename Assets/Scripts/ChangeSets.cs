@@ -13,8 +13,8 @@ public class ChangeSets : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        set1.SetActive(true);
-        set2.SetActive(false);
+        // set1.SetActive(false);
+        // set2.SetActive(true);
         mybuttons[0].interactable = false;
         mybuttons[1].interactable = true;
     }
